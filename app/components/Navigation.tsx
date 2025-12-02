@@ -126,7 +126,7 @@ export default function Navigation() {
 
               <a href="/contact" className="text-gray-900 hover:text-[#428bca] px-3 py-2 text-sm font-medium transition-colors">Contact </a>
               <a href="/contact" className="bg-[#428bca] hover:bg-[#357abd] text-white px-8 py-3 rounded-full text-sm font-medium transition-colors">Quote</a>
-              <div className="flex items-center gap-3 ml-85">
+              <div className="flex items-center gap-3 ml-20">
                 <div className="relative" ref={languageMenuRef}>
                   <button
                     type="button"
