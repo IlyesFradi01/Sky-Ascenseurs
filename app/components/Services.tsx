@@ -26,11 +26,14 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-32 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="services-support" className="py-32 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900">Our Services</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive elevator solutions tailored to your needs</p>
+          <p className="tracking-[0.4em] uppercase text-sm text-gray-400 mb-4">Floor 5</p>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900">Services & Support</h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Comprehensive elevator solutions, maintenance, and concierge-level assistance for every phase of your project.
+          </p>
         </div>
         <div className="flex flex-wrap justify-center gap-20">
           {services.map((service, index) => (

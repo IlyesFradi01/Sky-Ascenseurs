@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/Group.png",
+  },
   title: "SKY Ascenseurs",
   description: "Installation, maintenance et rénovation d’ascenseurs pour résidentiel et tertiaire.",
 };

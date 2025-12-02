@@ -1,10 +1,24 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  i18n: {
-    locales: ["fr", "en", "ar"],
-    defaultLocale: "fr",
-    localeDetection: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'flagcdn.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+        pathname: '/wikipedia/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'restcountries.com',
+        pathname: '/**',
+      },
+    ],
   },
 };
 
