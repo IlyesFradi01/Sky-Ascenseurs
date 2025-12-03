@@ -35,14 +35,14 @@ export default function Services() {
             Comprehensive elevator solutions, maintenance, and concierge-level assistance for every phase of your project.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-20">
+        <div className="flex flex-wrap justify-center gap-10 sm:gap-16">
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: index * 0.18 }}
-              className="flex flex-col items-center justify-center text-center w-56 h-56 md:w-60 md:h-60 rounded-full bg-[#428bca] shadow-lg p-6 mb-4"
+              className="flex flex-col items-center justify-center text-center w-44 h-44 sm:w-56 sm:h-56 md:w-60 md:h-60 rounded-full bg-[#428bca] shadow-lg p-6 mb-4"
             >
               <img src={service.img} alt={service.title} className="w-20 h-20 object-contain mb-4 drop-shadow" />
               <h3 className="text-xl md:text-2xl font-semibold mb-2 text-white">{service.title}</h3>

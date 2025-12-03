@@ -108,7 +108,7 @@ export default function Hero() {
   const nextFloor = indicatorFloors[1];
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white py-20 sm:py-28">
       <div className="absolute inset-0 z-0">
         <Image
           src={heroSrc}
@@ -122,20 +122,24 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-950/90" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] items-center">
-          <div className="space-y-10 text-left lg:text-right  lg:max-w-3xl">
-            <div className="ml-10 lg:ml-auto">
-              
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mt-4 ">Sky Ascenseurs </h1>
-              <h2 className="mt-6 ml-10 lg:ml-0 md:text-3xl text-white/80  font-bold">
-              We prioritize your comfort above anything else
+          <div className="space-y-8 text-center lg:text-right lg:max-w-3xl mx-auto lg:mx-0">
+            <p className="text-sm uppercase tracking-[0.4em] text-slate-300">Next stop · Comfort</p>
+            <div className="lg:ml-auto space-y-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
+                Sky Ascenseurs
+              </h1>
+              <h2 className="text-lg sm:text-2xl md:text-3xl text-white/80 font-semibold">
+                We prioritize your comfort above anything else
               </h2>
+              <p className="text-base sm:text-lg text-white/70 max-w-2xl lg:ml-auto">
+                Tailored elevator journeys for residences, commercial landmarks, and premium hospitality spaces—engineered to move
+                smoothly across every floor of your day.
+              </p>
             </div>
 
-            
-
-            <div className="flex flex-col sm:flex-row gap-6 sm:justify-end">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 sm:justify-end">
               <button
                 onClick={() => scrollToSection('about')}
                 className="bg-[#428bca] hover:bg-[#357abd] text-white px-10 py-4 rounded-full text-lg font-semibold transition-all transform hover:translate-y-[-2px] shadow-xl shadow-[#428bca]/40"

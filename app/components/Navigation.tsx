@@ -15,6 +15,16 @@ const languages: LanguageOption[] = [
   { code: 'ar', label: 'العربية', countryCode: 'sa' },
 ];
 
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/services', label: 'Services' },
+  { href: '/portfolio', label: 'Projects' },
+  { href: '/downloads', label: 'Catalogs' },
+  { href: '/contact', label: 'Contact' },
+];
+
 const FALLBACK_FLAG_URL = (countryCode: string) => `https://flagcdn.com/w40/${countryCode}.png`;
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -22,6 +32,7 @@ export default function Navigation() {
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [flagUrls, setFlagUrls] = useState<Record<string, string>>({});
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const languageMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -90,6 +101,39 @@ export default function Navigation() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const previousOverflow = document.body.style.overflow;
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = previousOverflow || '';
+    }
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileMenuOpen]);
+
   const handleSoundToggle = () => {
     const nextValue = !soundEnabled;
     if (typeof window !== 'undefined') {
@@ -115,18 +159,20 @@ export default function Navigation() {
             </button>
           </div>
           
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-6">
-              <a href="/" className="text-gray-900 hover:text-[#428bca] px-3 py-2 text-sm font-medium transition-colors">Home</a>
-              <a href="/about" className="text-gray-900 hover:text-[#428bca] px-3 py-2 text-sm font-medium transition-colors">About</a>
-              <a href="/faq" className="text-gray-900 hover:text-[#428bca] px-3 py-2 text-sm font-medium transition-colors">FAQ</a>
-              <a href="/services" className="text-gray-900 hover:text-[#428bca] px-3 py-2 text-sm font-medium transition-colors">Services</a>
-              <a href="/portfolio" className="text-gray-900 hover:text-[#428bca] px-3 py-2 text-sm font-medium transition-colors">Projects</a>
-              <a href="/downloads" className="text-gray-900 hover:text-[#428bca] px-3 py-2 text-sm font-medium transition-colors">Catalogs</a>
-
-              <a href="/contact" className="text-gray-900 hover:text-[#428bca] px-3 py-2 text-sm font-medium transition-colors">Contact </a>
-              <a href="/contact" className="bg-[#428bca] hover:bg-[#357abd] text-white px-8 py-3 rounded-full text-sm font-medium transition-colors">Quote</a>
-              <div className="flex items-center gap-3 ml-20">
+          <div className="hidden md:flex flex-1 items-center justify-end">
+            <div className="flex items-center space-x-6">
+              {navLinks.map((link) => (
+                <a key={link.href} href={link.href} className="text-gray-900 hover:text-[#428bca] px-3 py-2 text-sm font-medium transition-colors">
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="/contact"
+                className="bg-[#428bca] hover:bg-[#357abd] text-white px-8 py-3 rounded-full text-sm font-medium transition-colors shadow-sm"
+              >
+                Quote
+              </a>
+              <div className="flex items-center gap-3 ml-8">
                 <div className="relative" ref={languageMenuRef}>
                   <button
                     type="button"
@@ -189,10 +235,7 @@ export default function Navigation() {
                     </div>
                   )}
                 </div>
-               
-              </div>
-              <div className="flex items-center gap-2">
-              <button
+                <button
                   type="button"
                   onClick={handleSoundToggle}
                   className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium transition bg-transparent ${
@@ -202,21 +245,86 @@ export default function Navigation() {
                   }`}
                 >
                   <span className="text-lg">{soundEnabled ? '🔊' : '🔇'}</span>
-                  
                 </button>
               </div>
             </div>
           </div>
 
           <div className="md:hidden">
-            <button className="text-gray-900 hover:text-[#428bca] p-2">
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            <button
+              className="text-gray-900 hover:text-[#428bca] p-2 transition"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+            >
+              {mobileMenuOpen ? (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
       </div>
+      {mobileMenuOpen && (
+        <div className="md:hidden fixed top-20 left-0 right-0 z-40 border-t border-gray-100 bg-white/95 backdrop-blur-md shadow-lg">
+          <div className="px-4 py-6 space-y-6">
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="rounded-lg px-4 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="rounded-full px-4 py-3 text-base font-semibold text-center text-white bg-[#428bca] hover:bg-[#357abd] transition"
+              >
+                Get a Quote
+              </a>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="language-select" className="text-xs uppercase tracking-[0.2em] text-gray-500">
+                  Language
+                </label>
+                <div className="mt-2 relative">
+                  <select
+                    id="language-select"
+                    value={language}
+                    onChange={(event) => setLanguage(event.target.value)}
+                    className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#428bca]/40"
+                  >
+                    {languages.map((option) => (
+                      <option key={option.code} value={option.code}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={handleSoundToggle}
+                className={`w-full flex items-center justify-between rounded-2xl px-4 py-3 border text-sm font-medium transition ${
+                  soundEnabled ? 'border-emerald-400 text-emerald-700' : 'border-gray-200 text-gray-700'
+                }`}
+              >
+                <span>Travel sound</span>
+                <span className="text-lg">{soundEnabled ? '🔊' : '🔇'}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
