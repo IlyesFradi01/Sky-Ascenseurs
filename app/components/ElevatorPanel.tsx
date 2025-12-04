@@ -108,14 +108,13 @@ export default function ElevatorPanel() {
 
   return (
     <aside className="hidden xl:block fixed right-6 top-1/2 -translate-y-1/2 z-30">
-      <div className="w-72 rounded-[32px] bg-slate-900/80 backdrop-blur-lg border border-white/10 shadow-2xl overflow-hidden">
+      <div className="w-25 rounded-[32px] bg-slate-900/80 backdrop-blur-lg border border-white/10 shadow-2xl overflow-hidden">
         <div className="p-6 border-b border-white/10">
-          <p className="text-xs uppercase tracking-[0.5em] text-blue-200/80">Command Panel</p>
+        
           <div className="mt-4 flex items-center justify-between text-white">
-            <span className="text-4xl font-semibold">{FLOOR_CONFIG.find((floor) => floor.id === activeFloor)?.number ?? '0'}</span>
+            <span className="text-4xl font-semibold ml-4">{FLOOR_CONFIG.find((floor) => floor.id === activeFloor)?.number ?? '0'}</span>
             <div className="flex gap-3">
-              <span className="h-3 w-3 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="text-xs uppercase tracking-[0.4em] text-white/60">Ready</span>
+             
             </div>
           </div>
           <div className="mt-4 h-1 rounded-full bg-white/10">
@@ -136,11 +135,7 @@ export default function ElevatorPanel() {
                 aria-current={isActive}
               >
                 <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-xs uppercase tracking-[0.4em] text-blue-200/70">🛗 Floor {floor.number}</div>
-                    <p className="mt-1 text-lg font-semibold">{floor.label}</p>
-                    <p className="text-sm text-white/60">{floor.description}</p>
-                  </div>
+                
                   <div
                     className={`flex h-12 w-12 items-center justify-center rounded-full border transition ${
                       isActive ? 'border-blue-300 bg-blue-300/10 text-white' : 'border-white/20 text-white/60'
