@@ -32,13 +32,13 @@ export default function FloorBeaconRail() {
             <button
               key={floor.id}
               onClick={() => scrollToFloor(floor.id)}
-              className="flex items-center gap-3 text-left"
+              className="flex items-center gap-2 text-left"
               aria-current={isActive}
               aria-label={`Go to floor ${floor.number} ${floor.label}`}
               style={{ pointerEvents: 'auto' }}
             >
               <span
-                className={`h-px w-6 transition-all duration-300 ${isActive ? 'bg-cyan-200 scale-x-125' : 'bg-white/40'}`}
+                className={`h-px w-3 transition-all duration-300 ${isActive ? 'bg-cyan-200 scale-x-125' : 'bg-white/40'}`}
                 aria-hidden
               ></span>
               <span
